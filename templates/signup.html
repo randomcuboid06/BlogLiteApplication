@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block links %}<link rel="stylesheet" href="../static/signup.css">{% endblock %}
+
+{% block content %}
+    <div class="main">    
+        <div class="div1">
+            <h1 style="margin-bottom: 25px;">Sign Up</h1>
+            <form method="POST">
+                <label for="email">Email ID : </label>    
+                <input type="email" placeholder="Email Address" id="email" name="email">
+                <br/>
+                <label for="username">Username : </label>    
+                <input type="text" placeholder="Username" id="username" name="username">
+                <br/>
+                <label for="password">Password : </label> 
+                <input type="password" id="password" name="password" placeholder="Enter Password">
+                <br/>
+                <label for="password1">Re-enter Password : </label> 
+                <input type="password" id="password" name="password1" placeholder="Enter Password again">
+                <button style="margin: 35px;" type="submit">SignUp and Login</button>
+                <br/>
+        </form>
+        </div>
+    </div>
+{% endblock %}    

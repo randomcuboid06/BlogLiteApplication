@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block links %} <link rel="stylesheet" href="../static/search.css"> {% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="search form-group">
+        <label for="username" class="m-3">Search username : </label>
+        <input type="text" id="username" name="username" placeholder="username" class="form-control w-25 m-2">
+        <button type="submit" class="btn btn-success m-2">Search!</button>
+    </div>
+</form>
+{% if request.method == 'POST' %}
+{% if user_list != [] %}
+<div class="container">
+<table class="table bg-light table-bordered">
+    <thead class="thead-light">
+        <tr>
+        <th>User's ID</th>
+        <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td><a href="/profile/{{user.username}}">{{user.username}}</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<h1>No such user found!</h1>
+{% endif %}
+{% endif %}
+{% endblock %}

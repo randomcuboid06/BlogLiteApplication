@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block links %}<link rel="stylesheet" href="../static/profile.css">{% endblock %}
+{% block content %}
+<div class="main container">
+    <div class="card name" style="width: 10rem;">
+        <div class="card-header">Username</div>
+        <div class="card-body">
+            <h4 class="card-title">{{ user_name }}</h4>
+            <div>
+            <a href={{url_for('follow', user_name=user_name )}}><button class="btn btn-success m-1">Follow</button></a>
+            <a href={{url_for('unfollow', user_name=user_name )}}><button class="btn btn-danger m-1">Unfollow</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="card stats" style="width: 40rem;">
+        <div class="card-header">Details</div>
+        <div class="card-body">
+            <h2 class="p-1 card-title">Number of blog posts created- {{ posts | length }}</h2>
+            <h2 class="p-1 card-body"><a href={{ url_for('followers', user_name = user_name) }}>Followers</a>: {{ (profuser.followers.all() | length)-1 }}</h2>
+            <h2 class="p-1 card-body"><a href={{ url_for('following', user_name = user_name) }}>Following</a> : {{ profuser.followed.all() | length -1 }}</h2>
+        </div>
+    </div>
+</div>
+<div class="posts">
+    <h1 class="text-center">Their Posts</h1>
+    {% if posts != [] %}
+    <div class="container" style="text-align: center; width: 50rem;">
+        {% for post in posts %}
+        <div class="card m-2 p-2 border-dark">
+            <div class="card-header">
+              {{ post.title | safe }}
+            </div>
+            <div class="card-body">
+                <p>{{ post.text | safe }}</p>
+                <img src="{{ post.image }}" alt="" width="320px" height="180px" class="m-2">
+              <p class="ml-3 float-right m-2">Created on {{ post.date_created }}</p>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p class="h3 text-center text-success p-3">They haven't posted anything yet !</p>
+    {% endif %}
+</div>
+{% endblock %}

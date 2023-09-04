@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Followers{% endblock %}
+{% block content %}
+{% if followers[1:] != [] %}
+<h1 class="text-center text-primary">Followers</h1>
+<table class="table bg-light table-striped container w-50 mx-auto">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">User_id</th>
+            <th class="text-center">User</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for follower in followers %}
+        <tr>
+            {% if user.username != follower[1] %}
+            <td>{{follower[0]}}</td>
+            <td><a href={{ url_for('profile', user_name = follower[1] ) }}>{{ follower[1] }}</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1 class="text-success text-center p-2 m-2">Be the first one to follow this user !!</h1>
+{% endif %}
+{% endblock %}

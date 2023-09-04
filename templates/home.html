@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <div style="display: flex; justify-content: space-between;">
+    <h1 class="text-center p-3">Hello {{ user.username }} !</h1>
+    <a href="{{ url_for('create_post') }}"><button class="btn btn-primary rounded m-4" type="submit">+ Create Post</button></a>
+    </div>
+    {% if plist == [] %}
+    <h2 class="text-success text-center p-4">Start following some users or create posts to populate your feed !!</h2>
+    {% endif %}
+    {% if plist != [] %}
+    <div class="container" style="text-align: center; width: 50rem;">
+    {% for post in plist %}
+    <div class="card m-2 p-2 border-dark">
+        <div class="card-header">
+          {{ post.title | safe }}
+        </div>
+        <div class="card-body">
+            {{ post.text | safe }}
+            <br>
+            <img src="{{ post.image }}" alt="" width="320px" height="180px" class="m-2">
+            {% if post.users.username != current_user.username %}
+            <h5>- by <a href="/profile/{{ post.users.username }}">{{ post.users.username }}</a></h5>
+            {% else %}
+            <h5>- by <a href="/myprofile">{{ post.users.username }}</a></h5>
+            {% endif %}
+          <p class="ml-3 float-right m-2">Created on {{ post.date_created }}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+    {% if not user.is_authenticated %}
+        <div class="container">
+            <h1 class="text-primary text-center p-5">Welcome to Blog Lite Application !</h1>
+            <br/>
+            <p class="text-secondary text-center">Please Login or Sign Up to access blog posts</p>
+        </div>
+    {% endif %}
+{% endblock %}

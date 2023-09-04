@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block links %}<link rel="stylesheet" href="../static/profile.css">{% endblock %}
+{% block content %}
+<div class="main container">
+    <div class="card name bg-light">
+        <p class="card-header text-center">User Details</p>
+        <div class="card-body">
+            <h1 class="card-title p-2">{{user.username}}</h1>
+            <h3 class="card-text p-2">{{user.email}}</h3>
+        </div>
+    </div>
+    <div class="card stats bg-light">
+        <p class="card-header text-center">User Stats</p>
+        <div class="card-body text-center">
+            <h2 class="p-2 card-title">Number of blog posts created - {{ blog_list | length }}</h2>
+            <h2 class="p-2 card-text"><a href={{ url_for('followers', user_name = user.username) }}>Followers</a> : {{ (user.followers.all() | length)-1 }}</h2>
+            <h2 class="p-2 card-text"><a href={{ url_for('following', user_name = user.username) }}>Following</a> : {{ user.followed.all() | length - 1 }}</h2>
+        </div>
+    </div>
+</div>
+<div class="posts">
+    <h1 class="text-center">My Posts</h1>
+    {% if blog_list != [] %}
+    <div class="container" style="text-align: center; width: 50rem;">
+        {% for post in blog_list %}
+        <div class="card m-2 p-2 border-dark">
+            <div class="card-header">
+              {{ post.title | safe }}
+            </div>
+            <div class="buttons display-flex">
+            <a href={{ url_for('delete_post', post_id = post.post_id) }}><button type="button" class="btn btn-danger m-2" style="float: right;">Delete Post</button></a>
+            <a href={{ url_for('edit_post', post_id = post.post_id) }}><button type="button" class="btn btn-success m-2" style="float: right;">Edit Post</button></a>
+            </div>
+            <div class="card-body">
+                {{ post.text | safe }}
+                <br>
+                <img src="{{ post.image }}" alt="" width="320px" height="180px" class="m-2">
+              <p class="ml-3 float-right m-2">Created on {{ post.date_created }}</p>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p class="h3 text-center text-success p-3">You haven't posted anything yet !</p>
+    {% endif %}
+</div>
+{% endblock %}

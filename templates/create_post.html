@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="../static/create_post.css">
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="margin: 2rem;">Create a Post</h1>
+<div class="container" style="width: 40%;border: 2px solid red; border-radius: 10px;">
+<form method="POST">
+    <label for="title" class="mt-2">Post's Title -</label>
+    <input type="text" id="title" name="title" placeholder="Post Title" class="form-control mt-2 ">
+    <label for="text" class="mt-2">Enter post's content here..</label>
+    <textarea id="text" name="text" class="form-control mt-2" placeholder="Enter Content Here"></textarea>
+    <label for="image" class="mt-2">Enter Image URL</label>
+    <input type="text" id="image" name="image" placeholder="Insert Image URL" class="form-control mt-2 ">
+    <button class="btn btn-success mt-3 mb-3" type="submit">Post !</button>
+</form>
+</div>
+{% endblock %}
