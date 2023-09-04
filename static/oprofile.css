@@ -1,0 +1,22 @@
+.name {
+    border: 2px solid cornsilk;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 2rem;
+    text-align: center;
+    width: max-content;
+}
+
+.main {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.stats {
+    border: 2px solid cornsilk;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 2rem;
+    width: max-content;
+}

@@ -1,0 +1,11 @@
+.search {  
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.sinput {
+    width: 1px;
+}
